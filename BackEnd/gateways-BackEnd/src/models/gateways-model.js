@@ -13,9 +13,9 @@ const GatewaysSchema = new mongoose.Schema({
     //     status: Boolean
       
     // }]
-});
+},{ collection : 'gateway' });
 
-const Gateways = mongoose.model('gateways', GatewaysSchema);
+const Gateways = mongoose.model('Gateway', GatewaysSchema);
 
 module.exports = Gateways;
 
