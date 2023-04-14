@@ -4,13 +4,38 @@
     {
       "gateway_id": "1",
       "gateway_name": "gateway_1",
-      "IPv4": "192.0.2.144"
+      "IPv4": "192.0.2.144",
+      "devices":[
+        {
+          "device_id": 1,
+          "device_vendor": "device_1",
+          "created_date": "1/2/2023",
+          "status": false
+        },
+       
+        {
+          "device_id": 2,
+          "device_vendor": "device_2",
+          "created_date": "2/2/2023",
+          "status": true,
+          "devices":[]
+        },
+        {
+          "device_id": 3,
+          "device_vendor": "device_3",
+          "created_date": "3/2/2023",
+          "status": false,
+          "devices":[]
+        },
+       
+      ]
     },
    
     {
         "gateway_id": "2",
         "gateway_name": "gateway_2",
-        "IPv4": "192.0.2.146"
+        "IPv4": "192.0.2.146",
+
       },
       {
         "gateway_id": "3",

@@ -6,7 +6,9 @@ const {
     addGateway,
     updateGateway,
     getAllGateways,
-    createGateways
+    createGateways,
+    getGatewayDevices,
+    deleteGatewayDevice
 } = require('../controllers/gateways-controller');
 
 /**
@@ -26,7 +28,7 @@ router.get('/allgateways',getAllGateways);
  * @route GET /gateways
  * @description get all gateways from the backend
  */
-router.get('/gateways', getGateway);
+router.get('/gateways/:gatewayId', getGateway);
 
 /**
  * @route POST /gateways/documents
@@ -39,5 +41,18 @@ router.post('/addgateways', addGateway);
  * @description update gateway (with id)
  */
 router.put('/gateways/:id', updateGateway);
+
+/**
+ * @route Get /gate/gatewaydevices/:gatewayId
+ * @description update gateway (with id)
+ */
+router.get('/gatewaydevices/:gatewayId', getGatewayDevices);
+
+/**
+ * @route Delete /gate/deletedevice/
+ * @description Delete Device from gateway
+ */
+router.delete('/deletedevice', deleteGatewayDevice);
+
 
 module.exports = router;
