@@ -8,7 +8,10 @@ const {
     getAllGateways,
     createGateways,
     getGatewayDevices,
-    deleteGatewayDevice
+    deleteGatewayDevice,
+    saveGatewayDevice,
+    deleteGateway,
+    saveGateway
 } = require('../controllers/gateways-controller');
 
 /**
@@ -48,11 +51,31 @@ router.put('/gateways/:id', updateGateway);
  */
 router.get('/gatewaydevices/:gatewayId', getGatewayDevices);
 
+
+/*
+* @route Delete /gates/deletedevice/
+* @description Delete Device from gateway
+*/
+router.delete('/deletedevice/:gatewayId/:deviceId',deleteGatewayDevice);
+
 /**
- * @route Delete /gate/deletedevice/
+ * @route Delete /gates/deletegateway/
  * @description Delete Device from gateway
  */
-router.delete('/deletedevice', deleteGatewayDevice);
+router.delete('/deletegateway/:gatewayId/',deleteGateway);
+
+
+/**
+ * @route save /gate/savedevice/
+ * @description save new Device to certain gateway
+ */
+router.post('/savedevice', saveGatewayDevice);
+
+/**
+ * @route save /gate/savegateway/
+ * @description save new gateway to certain database
+ */
+router.post('/savegateway', saveGateway);
 
 
 module.exports = router;

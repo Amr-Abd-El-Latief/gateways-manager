@@ -1,0 +1,68 @@
+[{
+  "_id": {
+    "$oid": "64373b8c2ff0118cdb894c44"
+  },
+  "gateway_id": "1",
+  "gateway_name": "gateway_1",
+  "IPv4": "192.0.2.144",
+  "device": [
+    {
+      "device_id": 1,
+      "device_vendor": "device_1",
+      "created_date": {
+        "$date": {
+          "$numberLong": "1672610400000"
+        }
+      },
+      "status": false,
+      "_id": {
+        "$oid": "64373b8c2ff0118cdb894c45"
+      }
+    },
+    {
+      "device_id": 2,
+      "device_vendor": "device_2",
+      "created_date": {
+        "$date": {
+          "$numberLong": "1675288800000"
+        }
+      },
+      "status": true,
+      "_id": {
+        "$oid": "64373b8c2ff0118cdb894c46"
+      }
+    },
+    {
+      "device_id": 3,
+      "device_vendor": "device_3",
+      "created_date": {
+        "$date": {
+          "$numberLong": "1677708000000"
+        }
+      },
+      "status": false,
+      "_id": {
+        "$oid": "64373b8c2ff0118cdb894c47"
+      }
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64373b8c2ff0118cdb894c49"
+  },
+  "gateway_id": "2",
+  "gateway_name": "gateway_2",
+  "IPv4": "192.0.2.146",
+  "device": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64373b8c2ff0118cdb894c4b"
+  },
+  "gateway_id": "3",
+  "gateway_name": "gateway_3",
+  "IPv4": "192.0.2.148",
+  "device": [],
+  "__v": 0
+}]
