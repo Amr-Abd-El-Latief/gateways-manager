@@ -1,13 +1,12 @@
 // Define methods for Gateways database collection endpoints
 const Gateway = require('../models/gateways-model');
 const { ObjectId } = require('mongoose').Types;
-const AllGateways = require('../Mock-data/test-data');
 
 function _error_msg(text, error) {
   return { message: text, error: error };
 }
 
-// get all Gateways documents, if none return 404
+// create sample gateways in database (sample data)
 exports.createGateways = async (req, res) => {
   gateway = await Gateway.create({
     "gateway_id": "1",
@@ -61,18 +60,15 @@ exports.createGateways = async (req, res) => {
 
 
 
-// get all Gateways documents, if none return 404
+// get all Gateways from database, if none return 404
 exports.getAllGateways = async (req, res) => {
   Gateway.find().then((gateway) => res.json(gateway))
     .catch((err) => { res.status(404).json(_error_msg('gateway not found', err.message)) })
 
 };
 
-// get all Gateway Gateway, if none return 404
+// gets certain Gateway from database by its id, if none return 404
 exports.getGateway = async (req, res) => {
-  console.log("AllGateways : " + JSON.stringify(AllGateways));
-  // res.json(AllGateways);
-
   if (req.params.gatewayId) {
     // if ID is present in query, get gateway with that id
     Gateway.find({ gateway_id: req.params.gatewayId })
@@ -85,88 +81,6 @@ exports.getGateway = async (req, res) => {
 
 
 
-// get all devices for certain gateway 
-exports.getGatewayDevices = async (req, res) => {
-  console.log("getGatewayDevices called");
-  // res.json(AllGateways);
-
-  if (req.params.gatewayId) {
-    // if ID is present in query, get gateway with that id
-    Gateway.find({ gateway_id: req.params.gatewayId })
-      .then((gateway) => res.json(gateway[0].device))
-      .catch((err) => { res.status(404).json(_error_msg('gateway not found with that ID. Error: ', err.message)) })
-  } else {
-    res.status(400).json(_error_msg("Can't get gateway due to missing params in the request", err.message));
-  }
-};
-// post Gateways gateway(s)
-exports.addGateway = (req, res) => {
-
-  console.log(" req.body : " + JSON.stringify(req.body))
-  let gateways = req.body;
-  // TODO: add validation for body
-  let gateways_count = gateways.length ? gateways.length : 1; // NOTE: if docs.length undefined it is 1.
-
-  Gateway.create(gateways)
-    .then((data) => res.json({ message: `${gateways_count} gateway(s) added successfully!` }))
-    .catch((err) => res.status(400).json(_error_msg('Failed to add gateway', err.message)));
-};
-
-// update Gateways gateway.
-exports.updateGateway = (req, res) => {
-  const fields = {};
-
-  Gateway.findByIdAndUpdate(
-    req.params.id,
-    fields,
-    { new: true, runValidators: true }, // to return updated object
-  )
-    .then((data) => res.json(data))
-    .catch((err) => res.status(400).json(_error_msg('Failed to update gateway.', err.message)));
-};
-
-
-// Delete gateway from database
-exports.deleteGateway = (req, res) => {
-  if (req.params.gatewayId) {
-    let gatewayId = req.params.gatewayId;
-
-    Gateway.deleteOne({ _id: gatewayId }).then((data) => res.json(data))
-      .catch((err) => res.status(400).json(_error_msg('Failed to delete Gateway.', err.message)))
-
-  } else {
-    res.status(400).json(_error_msg("Can't delete Gateway due to missing params in the request", err.message));
-
-  }
-
-};
-
-
-// Delete device from gateway
-exports.deleteGatewayDevice = (req, res) => {
-
-  if (req.params.deviceId) {
-    var deviceId = req.params.deviceId;
-    var gatewayId = req.params.gatewayId;
-
-    Gateway.update({
-      "_id": ObjectId(gatewayId)
-    },
-      {
-        "$pull": {
-          "device": {
-            "_id": ObjectId(deviceId)
-          }
-        }
-      }).then((data) => res.json(data))
-      .catch((err) => res.status(400).json(_error_msg('Failed to delete Device.', err.message)))
-
-  } else {
-    res.status(400).json(_error_msg("Can't delete Device due to missing params in the request", err.message));
-
-  }
-
-};
 
 
 // post gateway 
@@ -179,7 +93,7 @@ exports.saveGateway = (req, res) => {
 
     if (gateway['IPv4'] && _validateIp(gateway['IPv4'])) {
 
-      Gateway.create(gateway).then((data) => res.json({ message: `${gateways_count} gateway(s) added successfully!` }))
+      Gateway.create(gateway).then((data) => res.json({ message: `gateway added successfully!` }))
         .catch((err) => res.status(400).json(_error_msg('Failed to save gateway', err.message)));
     } else {
 
@@ -195,13 +109,40 @@ exports.saveGateway = (req, res) => {
 }
 
 
+// Deletes certain gateway from database
+exports.deleteGateway = (req, res) => {
+  if (req.params.gatewayId) {
+    let gatewayId = req.params.gatewayId;
 
+    Gateway.deleteOne({ _id: gatewayId }).then((data) => res.json(data))
+      .catch((err) => res.status(400).json(_error_msg('Failed to delete Gateway.', err.message)))
+
+  } else {
+    res.status(400).json(_error_msg("Can't delete Gateway due to missing params in the request", err.message));
+
+  }
+
+};
+
+
+// Devices
+
+// gets all devices for certain gateway 
+exports.getGatewayDevices = async (req, res) => {
+  if (req.params.gatewayId) {
+    // if ID is present in query, get gateway with that id
+    Gateway.find({ gateway_id: req.params.gatewayId })
+      .then((gateway) => res.json(gateway[0].device))
+      .catch((err) => { res.status(404).json(_error_msg('gateway not found with that ID. Error: ', err.message)) })
+  } else {
+    res.status(400).json(_error_msg("Can't get gateway due to missing params in the request", err.message));
+  }
+};
 
 
 // post  Device 
 exports.saveGatewayDevice =async (req, res) => {
 
-  console.log(" saveGatewayDevice req.body : " + JSON.stringify(req.body));
   if (req.body.device && req.body.gatewayId) {
     let data = req.body;
     var device = data.device;
@@ -231,6 +172,34 @@ exports.saveGatewayDevice =async (req, res) => {
 
 }
 };
+
+// Deletes certain device from gateway
+exports.deleteGatewayDevice = (req, res) => {
+
+  if (req.params.deviceId) {
+    var deviceId = req.params.deviceId;
+    var gatewayId = req.params.gatewayId;
+
+    Gateway.update({
+      "_id": ObjectId(gatewayId)
+    },
+      {
+        "$pull": {
+          "device": {
+            "_id": ObjectId(deviceId)
+          }
+        }
+      }).then((data) => res.json(data))
+      .catch((err) => res.status(400).json(_error_msg('Failed to delete Device.', err.message)))
+
+  } else {
+    res.status(400).json(_error_msg("Can't delete Device due to missing params in the request", err.message));
+
+  }
+
+};
+
+
 
 
 

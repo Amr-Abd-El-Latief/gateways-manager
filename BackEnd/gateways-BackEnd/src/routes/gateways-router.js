@@ -3,8 +3,6 @@ const router = express.Router();
 
 const {
     getGateway,
-    addGateway,
-    updateGateway,
     getAllGateways,
     createGateways,
     getGatewayDevices,
@@ -14,6 +12,8 @@ const {
     saveGateway
 } = require('../controllers/gateways-controller');
 
+
+// ## gateways
 /**
  * @route /createtestgateways
  * @description create gateways in data base as sample data
@@ -29,47 +29,9 @@ router.get('/allgateways',getAllGateways);
 
 /**
  * @route GET /gateways
- * @description get all gateways from the backend
+ * @description gets certain gateway from database
  */
 router.get('/gateways/:gatewayId', getGateway);
-
-/**
- * @route POST /gateways/documents
- * @description add new gateway to the backend
- */
-router.post('/addgateways', addGateway);
-
-/**
- * @route PUT /gateways/documents/:id
- * @description update gateway (with id)
- */
-router.put('/gateways/:id', updateGateway);
-
-/**
- * @route Get /gate/gatewaydevices/:gatewayId
- * @description update gateway (with id)
- */
-router.get('/gatewaydevices/:gatewayId', getGatewayDevices);
-
-
-/*
-* @route Delete /gates/deletedevice/
-* @description Delete Device from gateway
-*/
-router.delete('/deletedevice/:gatewayId/:deviceId',deleteGatewayDevice);
-
-/**
- * @route Delete /gates/deletegateway/
- * @description Delete Device from gateway
- */
-router.delete('/deletegateway/:gatewayId/',deleteGateway);
-
-
-/**
- * @route save /gate/savedevice/
- * @description save new Device to certain gateway
- */
-router.post('/savedevice', saveGatewayDevice);
 
 /**
  * @route save /gate/savegateway/
@@ -77,5 +39,36 @@ router.post('/savedevice', saveGatewayDevice);
  */
 router.post('/savegateway', saveGateway);
 
+/**
+ * @route Delete /gates/deletegateway/
+ * @description Delete gateway from backend
+ */
+router.delete('/deletegateway/:gatewayId/',deleteGateway);
+
+
+
+
+
+// ###  devices
+
+/**
+ * @route Get /gate/gatewaydevices/:gatewayId
+ * @description gets all the devices for certain gateway
+ */
+router.get('/gatewaydevices/:gatewayId', getGatewayDevices);
+
+
+/*
+* @route Delete /gates/deletedevice/
+* @description Deletes Device from gateway
+*/
+router.delete('/deletedevice/:gatewayId/:deviceId',deleteGatewayDevice);
+
+
+/**
+ * @route save /gate/savedevice/
+ * @description save new Device to certain gateway
+ */
+router.post('/savedevice', saveGatewayDevice);
 
 module.exports = router;
