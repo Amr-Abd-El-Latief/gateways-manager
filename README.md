@@ -36,11 +36,12 @@ with its stored devices.
    -     How To run unit test: 
         
             1 - Reach by terminal to  the backend  main folder  besides the package.json file.
-            2 – in terminal run command:  npm run start   
- 
-             And for Code Covergae: 
-          
-            3 - ng test --code-coverage
+            2 - go inside the test folder 
+            2 – in terminal run command: npm test -- <test-file-name>
+             
+
+             example : npm test -- ip-validator-test.test.js
+
               
 
 ## how to run Database filling script
