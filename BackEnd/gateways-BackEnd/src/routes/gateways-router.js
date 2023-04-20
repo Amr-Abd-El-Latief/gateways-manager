@@ -48,7 +48,6 @@ router.delete('/deletegateway/:gatewayId/',deleteGateway);
 
 
 
-
 // ###  devices
 
 /**

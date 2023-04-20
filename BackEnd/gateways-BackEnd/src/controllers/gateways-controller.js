@@ -70,12 +70,11 @@ exports.getAllGateways = async (req, res) => {
 // gets certain Gateway from database by its id, if none return 404
 exports.getGateway = async (req, res) => {
   if (req.params.gatewayId) {
-    // if ID is present in query, get gateway with that id
     Gateway.find({ gateway_id: req.params.gatewayId })
       .then((gateway) => res.json(gateway))
       .catch((err) => { res.status(404).json(_error_msg('gateway not found with that ID. Error: ', err.message)) })
   } else {
-    res.status(400).json(_error_msg("Can't get gateway due to missing params in the request", err.message));
+    res.status(400).json("Can't get gateway due to missing params in the request");
   }
 };
 
@@ -102,7 +101,7 @@ exports.saveGateway = (req, res) => {
     }
   } else {
 
-    res.status(400).json(_error_msg("Can't save gateway due to missing params in the request", err.message));
+    res.status(400).json(_error_msg("Can't save gateway due to missing params in the request"));
 
   }
 
@@ -118,7 +117,7 @@ exports.deleteGateway = (req, res) => {
       .catch((err) => res.status(400).json(_error_msg('Failed to delete Gateway.', err.message)))
 
   } else {
-    res.status(400).json(_error_msg("Can't delete Gateway due to missing params in the request", err.message));
+    res.status(400).json(_error_msg("Can't delete Gateway due to missing params in the request"));
 
   }
 
@@ -135,7 +134,7 @@ exports.getGatewayDevices = async (req, res) => {
       .then((gateway) => res.json(gateway[0].device))
       .catch((err) => { res.status(404).json(_error_msg('gateway not found with that ID. Error: ', err.message)) })
   } else {
-    res.status(400).json(_error_msg("Can't get gateway due to missing params in the request", err.message));
+    res.status(400).json(_error_msg("Can't get gateway due to missing params in the request"));
   }
 };
 
@@ -168,7 +167,7 @@ exports.saveGatewayDevice =async (req, res) => {
   }
 
 }else{
-  res.status(400).json(_error_msg("Can't save device due to missing params in the request", err.message));
+  res.status(400).json(_error_msg("Can't save device due to missing params in the request"));
 
 }
 };
@@ -193,14 +192,11 @@ exports.deleteGatewayDevice = (req, res) => {
       .catch((err) => res.status(400).json(_error_msg('Failed to delete Device.', err.message)))
 
   } else {
-    res.status(400).json(_error_msg("Can't delete Device due to missing params in the request", err.message));
+    res.status(400).json(_error_msg("Can't delete Device due to missing params in the request"));
 
   }
 
 };
-
-
-
 
 
 

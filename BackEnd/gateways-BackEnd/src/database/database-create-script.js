@@ -4,7 +4,7 @@ const Gateway = require('../models/gateways-model');
 
 
 var url = "mongodb://localhost:27017/gatewaystestdb1";
-console.log("Database created!");
+
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   console.log("Database created!");

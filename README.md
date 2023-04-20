@@ -47,3 +47,30 @@ with its stored devices.
 ## how to run Database filling script
 
 
+1 - install mongodb 
+2- create database with the name: gatewaysdb
+
+3 - run the API :GET :   http://localhost:3000/api/gates/createtestgateways
+
+
+
+# technical Notes:
+
+## library and tools used in this app 
+
+Front End: 
+
+ 1 - angular 
+ 2 - angular material 
+ 3- Jasmin (in testing )
+
+ Back End: 
+
+ 1 - Nodejs
+ 2- Mongoose  
+ 2 - jest (in testing )
+
+
+Database: 
+
+1 - mongodb 
