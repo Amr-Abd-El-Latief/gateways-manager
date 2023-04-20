@@ -117,10 +117,6 @@ describe('testing gateways Apis', function() {
 })
 
 
-
-
-
-
      // testing API:  /gateways/:gatewayId    // Note gatewayId: make sure to test with gatewayId exists in DB 
       it('must get certain gateway when calling /gateways/:gatewayId ',function(done) {
         request('http://localhost:3000')
@@ -130,7 +126,17 @@ describe('testing gateways Apis', function() {
           
     });
 
+     // testing API:  /deletegateway/:gatewayId    // Note gatewayId: make sure to test with gatewayId exists in DB 
+     it('must delete certain gateway when calling /deletegateway/:gatewayId ',function(done) {
+      request('http://localhost:3000')
+      .delete('/api/gates/deletegateway/643d45c6a6cee6042118378e')
+      .expect(200)
+      .expect('Content-Type', 'application/json; charset=utf-8',done)
+        
   });
+
+  });
+
 
 
 
