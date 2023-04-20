@@ -48,7 +48,7 @@ with its stored devices.
 
 
 1 - install mongodb 
-2- create database with the name: gatewaysdb
+2- create database with the name: gatewaysdb    with initial  collection:  gateway
 
 3 - run the API :GET :   http://localhost:3000/api/gates/createtestgateways
 
